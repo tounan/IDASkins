@@ -12,7 +12,10 @@ _type_key_table = {
     'text_input': 'Font\\Text input',
     'output_wnd': 'Font\\Output window',
 }
-
+# config font family
+_monospace_font_family = 'Sarasa Mono TC'
+_monospace_font_size = 12
+_bBold, _bItalic = False, False
 
 class IdaFontConfig(object):
     """Read access to IDA's (undocumented) font config."""
@@ -21,6 +24,7 @@ class IdaFontConfig(object):
 
     @property
     def family(self):
+        return _monospace_font_family
         return idaapi.reg_read_string(
             'Name',
             self._key,
@@ -31,12 +35,15 @@ class IdaFontConfig(object):
 
     @property
     def size(self):
+        return _monospace_font_size
         return idaapi.reg_read_int('Size', 10, self._key)
 
     @property
     def bold(self):
+        return _bBold
         return idaapi.reg_read_bool('Bold', False, self._key)
 
     @property
     def italic(self):
+        return _bItalic
         return idaapi.reg_read_bool('Italic', False, self._key)
